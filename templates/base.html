@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Hamzawix">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{{ url_for('static', filename='js/hover.zoom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/hover.zoom.conf.js') }}"></script>
+    {% endblock %}
+
+  </head>
+  <body>
+    {% block nav %}
+    <div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Hamza Boughraira</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('about') }}">Projects</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('about') }}">Contact</a></li>
+        </ul>
+    </div>
+    </div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>My Bunker</h4>
+                    <p>
+                        Enasser Street, Menzel Fersi 5024<br/>
+                        Monastir, Tunisia<br/>
+                        +216 51-538-576<br/>
+                        hamza.boughraira@gmail.com
+                    </p>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h4>My Links</h4>
+                    <p>
+                        <a href="https://www.linkedin.com/in/hamza-boughraira-b833b9128">LinkedIn</a><br/>
+                        <a href="https://github.com/hamzawix">Github</a><br/>
+                        <a href="http://twidog.com/user/hamzawi_x/958437878">Twitter</a><br/>
+                        <a href="https://plus.google.com/101075115298231967281">Google+</a>
+
+                    </p>
+                </div>
+                
+            
+            </div>
+        
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+
+
+  </body>
