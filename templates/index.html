@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
+    <meta name="author" content="Hamzawix">
 
-    <title>Hamzawix - Portfolio</title>
+    <title>Hamzawix - Home</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
@@ -39,7 +38,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="work.html">Projects</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.html">Portfolio</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
@@ -55,51 +54,14 @@
 					<img src="{{ url_for('static', filename='img/hamza.png') }}" alt="Hamza">
 					<h1>Hi, I am Hamza!</h1>
 					<p>Hello everybody. I'm Hamza Boughraira, the Python/Django and IoT developer!.</p>
-					<p>Check my portfolio <a href="#">Here</a></p>
+					<p>Check my portfolio <a href="{{ url_for('portfolio') }}">Here</a></p>
 					<hr>
-					<!-- <h3>Career</h3>
-					<p>qsdkj</p>
-					<p>Please, consider to register to <a href="http://eepurl.com/IcgkX">our newsletter</a> to be updated with our latest themes and freebies. Like always, you can use this theme in any project freely. Share it with your friends.</p> -->
 				
 				</div><!-- /col-lg-8 -->
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /ww -->
 	
-	
-	<!-- +++++ Projects Section +++++ -->
-	<!--
-	<div class="container pt">
-		<div class="row mt centered">	
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port01.jpg" alt="" /></a>
-				<p>APE</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port02.jpg" alt="" /></a>
-				<p>RAIDERS</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port03.jpg" alt="" /></a>
-				<p>VIKINGS</p>
-			</div>
-		</div>  
-		 <div class="row mt centered">	
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt="" /></a>
-				<p>YODA</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt="" /></a>
-				<p>EMPERORS</p>
-			</div>
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt="" /></a>
-				<p>CHIEFS</p>
-			</div>
-		</div>
-	</div>
-	-->
 	
 	<!-- +++++ Footer Section +++++ -->
 	
@@ -109,12 +71,12 @@
 				<div class="col-lg-6">
 					<h4>My Bunker</h4>
 					<p>
-						Enasser Street, Menzel Fersi 5024,<br/>
-						+216 51-538-576, <br/>
-						hamza.boughraira@gmail.com, <br/>
-						Monastir, Tunisia.
+						Enasser Street, Menzel Fersi 5024<br/>
+						Monastir, Tunisia<br/>
+						+216 51-538-576<br/>
+						hamza.boughraira@gmail.com
 					</p>
-				</div><!-- /col-lg-4 -->
+				</div>
 				
 				<div class="col-lg-6">
 					<h4>My Links</h4>
@@ -125,12 +87,8 @@
 						<a href="https://plus.google.com/101075115298231967281">Google+</a>
 
 					</p>
-				</div><!-- /col-lg-4 -->
+				</div>
 				
-				<!--<div class="col-lg-4">
-					<h4>About Stanley</h4>
-					<p>This cute theme was created to showcase your work in a simple way. Use it wisely.</p>
-				</div>-->
 			
 			</div>
 		
