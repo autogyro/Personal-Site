@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Hamzawix - Projects{% endblock %}
+
+{% block content %}
+	<div class="container pt">
+		<div class="row mt">
+			<div class="col-lg-6 col-lg-offset-3 centered">
+				<h2>MY WORK</h2>
+				<hr>
+				<p>Don't tell people about you, show them who's you!</p>
+			</div>
+		</div>
+		<div class="row mt centered">	
+			<div class="col-lg-4">
+				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
+				<p>project</p>
+			</div>
+			<div class="col-lg-4">
+			
+				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
+				<p>project</p>
+			</div>
+				<div class="col-lg-4">
+				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>	
+				<p>project</p>
+			</div>
+		</div>
+		<div class="row mt centered">
+			<div class="col-lg-4">
+				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
+				<p>project</p>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
