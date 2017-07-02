@@ -11,27 +11,13 @@
 				<p>Don't tell people about you, show them who's you!</p>
 			</div>
 		</div>
-		<div class="row mt centered">	
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
-				<p>project</p>
-			</div>
-			<div class="col-lg-4">
-			
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
-				<p>project</p>
-			</div>
-				<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>	
-				<p>project</p>
-			</div>
-		</div>
 		<div class="row mt centered">
-			<div class="col-lg-4">
-				<a class="zoom green" href="work01.html"><img class="img-responsive" src="{{ url_for('static', filename='img/portfolio/port01.jpg') }}" alt="" /></a>
-				<p>project</p>
+		{% for p in projects %}
+			<div class="col-lg-3">
+				<a class="zoom green" href="{{ url_for('detail', id=p.id) }}"><img class="img-responsive" src="{{ url_for('static', filename=p.img_file) }}" alt="" /></a>
+				<p>{{ p.title }}</p>
 			</div>
-
+		{% endfor %}
 		</div>
 	</div>
 {% endblock %}
