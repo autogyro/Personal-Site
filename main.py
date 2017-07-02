@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, session, url_for, redirect
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import Required, Email
+from wtforms.validators import Required
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -38,14 +38,14 @@ class Email(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	sender_name = db.Column(db.String(64))
 	sender_address = db.Column(db.String(64))
-	subject = db.Column(db.Text)
+	subject = db.Column(db.String(32))
 	content = db.Column(db.Text)
 
 class Email_form(Form):
-	name = StringField('Name', validators=[Required()])
-	email = StringField('Email', validators=[Required(), Email()])
-	subject = StringField('Subject')
-	body = TextAreaField('Text', validators=[Required()])
+	name = StringField('name', validators=[Required()])
+	email = StringField('email', validators=[Required()])
+	subject = StringField('subject')
+	body = TextAreaField('text', validators=[Required()])
 	submit = SubmitField('Submit')
 
 @app.route('/')
@@ -66,9 +66,24 @@ def detail(id):
 	project = Project.query.filter_by(id=id).first()
 	return render_template('work01.html', project=project)
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
 	form = Email_form()
+	if form.validate_on_submit():
+		session['sender_name'] = form.name.data
+		session['sender_address'] = form.email.data
+		session['subject'] = form.subject.data
+		session['content'] = form.body.data
+
+		mail = Email(sender_name=session.get('sender_name'),
+					 sender_address=session.get('sender_address'),
+					 subject=session.get('subject'),
+					 content=session.get('content'))
+		db.session.add(mail)
+		db.session.commit()
+		flash('Form submitted')
+		return redirect(url_for('contact'))
+
 	return render_template('contact.html', form=form)
 
 if __name__ == '__main__':
