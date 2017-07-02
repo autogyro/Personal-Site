@@ -2,14 +2,20 @@ from flask import Flask, render_template
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
+from flask_bootstrap import Bootstrap
+from flask_wtf import Form
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import Required, Email
 import os
-from pprint import pprint
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite') 
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -35,6 +41,13 @@ class Email(db.Model):
 	subject = db.Column(db.Text)
 	content = db.Column(db.Text)
 
+class Email_form(Form):
+	name = StringField('Name', validators=[Required()])
+	email = StringField('Email', validators=[Required(), Email()])
+	subject = StringField('Subject')
+	body = TextAreaField('Text', validators=[Required()])
+	submit = SubmitField('Submit')
+
 @app.route('/')
 def index():
 	return render_template('index.html')
@@ -52,6 +65,11 @@ def work():
 def detail(id):
 	project = Project.query.filter_by(id=id).first()
 	return render_template('work01.html', project=project)
+
+@app.route('/contact')
+def contact():
+	form = Email_form()
+	return render_template('contact.html', form=form)
 
 if __name__ == '__main__':
 	manager.run()

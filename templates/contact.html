@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Hamzawix - Contact{% endblock %}
+
+{% block content %}
+	<div class="container pt">
+		<div class="row mt">
+			<div class="col-lg-6 col-lg-offset-3 centered">
+				<h2>CONTACT ME</h2>
+				<hr>
+				<p>Your email will be sent to <strong>hamza.boughraira@gmail.com</strong> and it will be stored in a small SQLite database so that I can check it out later.</p>
+			</div>
+		</div>
+		<div class="row mt">	
+			<div class="col-lg-8 col-lg-offset-2">
+				<form role="form">
+				{{ form.csrf_token() }}
+				  <div class="form-group">
+				  	{{ form.name(class="form-control", id="NameInputEmail1", placeholder="Your Name",) }}
+				   
+				    <br>
+				  </div>
+				  <div class="form-group">
+				  	{{ form.email(class="form-control", id="exampleInputEmail1", placeholder="Enter Email",) }}
+				   
+				    <br>
+				  </div>
+				  <div class="form-group">
+				  	{{ form.subject(class="form-control", id="SubjectEmail1", placeholder="Subject",) }}
+				  
+				    <br>
+				  </div>
+				  {{ form.body(class="form-control", rows=6 ,placeholder="your text") }}
+		
+				    <br>
+				    {{ form.submit(class="btn btn-success") }}
+				</form>		
+			</div>
+		</div><
+	</div>
+{% endblock %}
