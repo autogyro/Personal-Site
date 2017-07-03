@@ -93,8 +93,8 @@ a:after {
 
 
 .navbar-inverse {
-	padding-bottom: 8px;
-	padding-top: 8px;
+	padding-bottom: 20px;
+	padding-top: 20px;
 }
 
 .navbar-inverse {
@@ -154,7 +154,7 @@ a:after {
 #footer {
 	background-color: #2f2f2f;
 	padding-top: 50px;
-	padding-bottom: 96px; 
+	padding-bottom: 45px; 
 }
 
 #footer p {
