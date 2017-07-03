@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import Required
+from flask_mail import Mail, Message
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -15,10 +16,17 @@ bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite') 
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
+mail = Mail(app)
 manager.add_command('db', MigrateCommand)
 
 class Project(db.Model):
@@ -47,6 +55,12 @@ class Email_form(Form):
 	subject = StringField('subject')
 	body = TextAreaField('text', validators=[Required()])
 	submit = SubmitField('Submit')
+
+def send_email(mail_sender, to, subject, body, **kwargs):
+	msg = Message(mail_sender + "/" + subject,
+	              sender=app.config['MAIL_USERNAME'], recipients=[to])
+	msg.body = body
+	mail.send(msg)
 
 @app.route('/')
 def index():
@@ -81,7 +95,9 @@ def contact():
 					 content=session.get('content'))
 		db.session.add(mail)
 		db.session.commit()
-		flash('Form submitted')
+		send_email(session['sender_name'] + "::" +session['sender_address'], "hamza.boughraira@gmail.com",
+				   session['subject'], session['content'])
+		flash('Email sent successfully!')
 		return redirect(url_for('contact'))
 
 	return render_template('contact.html', form=form)
