@@ -9,6 +9,7 @@ from wtforms.validators import Required
 from flask_mail import Mail, Message
 import os
 from secrets import Secret
+from socket import gaierror
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -90,17 +91,22 @@ def contact():
 		session['subject'] = form.subject.data
 		session['content'] = form.body.data
 
-		mail = Email(sender_name=session.get('sender_name'),
+		try:
+			send_email(session['sender_name'] + "::" +session['sender_address'], 
+				       "hamza.boughraira@gmail.com",
+				   	   session['subject'], session['content'])
+			mail = Email(sender_name=session.get('sender_name'),
 					 sender_address=session.get('sender_address'),
 					 subject=session.get('subject'),
 					 content=session.get('content'))
-		db.session.add(mail)
-		db.session.commit()
-		send_email(session['sender_name'] + "::" +session['sender_address'], "hamza.boughraira@gmail.com",
-				   session['subject'], session['content'])
-		flash('Email sent successfully!')
-		return redirect(url_for('contact'))
+			db.session.add(mail)
+			db.session.commit()
+			flash('Success: Email sent successfully!')
+			return redirect(url_for('contact'))
 
+		except gaierror:
+			flash("Error: An error occured, check your connection")
+			return redirect(url_for('contact'))
 	return render_template('contact.html', form=form)
 
 if __name__ == '__main__':
