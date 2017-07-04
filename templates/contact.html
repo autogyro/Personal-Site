@@ -27,7 +27,7 @@
 				{% endif %}
 			{% endfor %}
 				<form role="form" method="POST">
-				{{ form.csrf_token() }}
+				{{ form.csrf_token }}
 				  <div class="form-group">
 				  	{{ form.name(class="form-control", id="NameInputEmail1", placeholder="Your Name",) }}
 				   

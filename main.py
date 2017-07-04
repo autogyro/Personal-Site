@@ -2,10 +2,9 @@ from flask import Flask, render_template, flash, session, url_for, redirect
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
-from flask_bootstrap import Bootstrap
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import Required
+from wtforms import validators
 from flask_mail import Mail, Message
 import os
 from secrets import Secret
@@ -13,7 +12,6 @@ from socket import gaierror
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite') 
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -51,11 +49,11 @@ class Email(db.Model):
 	subject = db.Column(db.String(32))
 	content = db.Column(db.Text)
 
-class Email_form(Form):
-	name = StringField('name', validators=[Required()])
-	email = StringField('email', validators=[Required()])
+class Email_form(FlaskForm):
+	name = StringField('name', validators=[validators.DataRequired()])
+	email = StringField('email', validators=[validators.DataRequired()])
 	subject = StringField('subject')
-	body = TextAreaField('text', validators=[Required()])
+	body = TextAreaField('text', validators=[validators.DataRequired()])
 	submit = SubmitField('Submit')
 
 def send_email(mail_sender, to, subject, body, **kwargs):
