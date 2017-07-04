@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, session, url_for, redirect
-from flask_script import Manager
+#from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, MigrateCommand
+#from flask_migrate import Migrate, MigrateCommand
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms import validators
@@ -24,10 +24,10 @@ app.config['MAIL_PASSWORD'] = Secret.mail_password
 app.config['SECRET_KEY'] = Secret.secret_key
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-manager = Manager(app)
+#migrate = Migrate(app, db)
+#manager = Manager(app)
 mail = Mail(app)
-manager.add_command('db', MigrateCommand)
+#manager.add_command('db', MigrateCommand)
 
 class Project(db.Model):
 	__tablename__ = 'projects'
@@ -108,4 +108,4 @@ def contact():
 	return render_template('contact.html', form=form)
 
 if __name__ == '__main__':
-	manager.run()
+	app.run()
